@@ -2,4 +2,4 @@
 coverage.out
 tmp/
 book/
-.env
+telegram-bot/.env
