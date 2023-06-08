@@ -19,10 +19,10 @@ func New(port int) *MainServer {
 		ginServer: gin.Default(),
 		Port:      port,
 		controllers: []controllers.RestController{
-			&controllers.ScheduleController{
-				RequestMapping: "/schedule",
-				Service:        &services.ScheduleServiceImpl{},
-			},
+			controllers.NewScheduleController(
+				"/schedule",
+				&services.ScheduleServiceImpl{},
+			),
 		},
 	}
 }
