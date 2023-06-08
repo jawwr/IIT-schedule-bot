@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"server/controllers"
+	"server/services"
 )
 
 type MainServer struct {
@@ -20,6 +21,7 @@ func New(port int) *MainServer {
 		controllers: []controllers.RestController{
 			&controllers.ScheduleController{
 				RequestMapping: "/schedule",
+				Service:        &services.ScheduleServiceImpl{},
 			},
 		},
 	}
