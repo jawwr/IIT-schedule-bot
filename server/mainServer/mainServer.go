@@ -20,7 +20,6 @@ func New(port int) *MainServer {
 		Port:      port,
 		controllers: []controllers.RestController{
 			controllers.NewScheduleController(
-				"/schedule",
 				&services.ScheduleServiceImpl{},
 			),
 		},

@@ -30,9 +30,9 @@ func (c ScheduleController) BindEndpoints(server *gin.Engine) {
 	})
 }
 
-func NewScheduleController(mapping string, service services.ScheduleService) *ScheduleController {
+func NewScheduleController(service services.ScheduleService) *ScheduleController {
 	return &ScheduleController{
-		requestMapping: mapping,
+		requestMapping: "/schedule",
 		Service:        service,
 	}
 }
