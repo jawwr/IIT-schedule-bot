@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"server/controllers"
+	"server/repository"
 	"server/services"
 )
 
@@ -20,7 +21,9 @@ func New(port int) *MainServer {
 		Port:      port,
 		controllers: []controllers.RestController{
 			controllers.NewScheduleController(
-				&services.ScheduleServiceImpl{},
+				services.NewScheduleService(
+					repository.NewMongoRepository(),
+				),
 			),
 		},
 	}

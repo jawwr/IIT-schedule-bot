@@ -3,10 +3,19 @@ package services
 import (
 	"math/rand"
 	"server/models"
+	"server/repository"
 	"strconv"
+	"time"
 )
 
 type ScheduleServiceImpl struct {
+	repository *repository.MongoRepository
+}
+
+func NewScheduleService(repository *repository.MongoRepository) *ScheduleServiceImpl {
+	return &ScheduleServiceImpl{
+		repository: repository,
+	}
 }
 
 func (s ScheduleServiceImpl) GetToday() *models.DaySchedule {
@@ -35,8 +44,8 @@ func (s ScheduleServiceImpl) GetLesson() *models.Lesson {
 	return &models.Lesson{
 		Name:      "что-то " + strconv.Itoa(number),
 		Teacher:   "smth",
-		TimeStart: "15:00",
-		TimeEnd:   "16:30",
+		TimeStart: time.Now(),
+		TimeEnd:   time.Now().Add(60 * time.Minute),
 	}
 }
 
