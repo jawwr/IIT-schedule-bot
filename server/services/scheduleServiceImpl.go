@@ -1,11 +1,8 @@
 package services
 
 import (
-	"math/rand"
 	"server/models"
 	"server/repository"
-	"strconv"
-	"time"
 )
 
 type ScheduleServiceImpl struct {
@@ -19,38 +16,18 @@ func NewScheduleService(repository *repository.MongoRepository) *ScheduleService
 }
 
 func (s ScheduleServiceImpl) GetToday() *models.DaySchedule {
-	return &models.DaySchedule{
-		Name: "Среда",
-		Lessons: []*models.Lesson{
-			s.GetLesson(),
-			s.GetLesson(),
-			s.GetLesson(),
-		},
-	}
+	return s.repository.GetSchedule()
 }
 
 func (s ScheduleServiceImpl) GetWeek() *models.WeekSchedule {
-	return &models.WeekSchedule{
-		Name: "Неделя",
-		Days: []*models.DaySchedule{
-			s.GetToday(),
-			s.GetToday(),
-		},
-	}
+	number := 1
+	return s.repository.GetWeekByNumber(number)
 }
 
 func (s ScheduleServiceImpl) GetLesson() *models.Lesson {
-	number := rand.Intn(10)
-	return &models.Lesson{
-		Name:      "что-то " + strconv.Itoa(number),
-		Teacher:   "smth",
-		TimeStart: time.Now(),
-		TimeEnd:   time.Now().Add(60 * time.Minute),
-	}
+	return s.repository.GetLesson()
 }
 
 func (s ScheduleServiceImpl) GetWeekByNumber(number int) *models.WeekSchedule {
-	week := s.GetWeek()
-	week.Name += " " + strconv.Itoa(number)
-	return week
+	return s.repository.GetWeekByNumber(number)
 }

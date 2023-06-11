@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "go",
+            "name": "Schedule api",
+            "goExecPath": "/usr/local/go/bin/go",
+            "buildParams": [],
+        },
+        
+    ]
+}
